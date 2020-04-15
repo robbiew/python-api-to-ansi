@@ -2,12 +2,12 @@ USE AT YOUR OWN RISK. ALWAYS BACKUP FILES, INCLUDING /MYSTIC/THEMES
 ---
 This is an example python (python3) script showing how to build a [Mystic BBS menu](http://wiki.mysticbbs.com/doku.php?id=menus) file that incorporates data from an external API. I'm using a [Board Game Geek python API](https://github.com/lcosmin/boardgamegeek), but you could use any API with a little elbow grease.
 
-The script grabs 'Hotness' data from BGG API, then builds/writes a mainmenu.ans file with the data:
+The script grabs ['Hotness'](https://boardgamegeek.com/wiki/page/More_About_Hotness) data from BGG API, then builds/writes a mainmenu.ans file with the retrieved data when its called:
 
 ```python
 python3 bgg-hotness.py
 ```
-...the output file (defined in the cfg file) can be used as a Mystic BBS menu file, bulletin, etc. 
+...the output file (defined in the cfg file) can then be used as a Mystic BBS menu file, bulletin, etc. 
  
 To use as a menu file, make sure you set this new ANSI menu file as the 'Display File' in Mystic's Menu Settings for the Main Menu (or in whatever menu you are creating).
 

@@ -1,9 +1,7 @@
 # mystic-api-menu
 
-// 
-// USE AT YOUR OWN RISK. ALWAYS BACKUP FILES, INCLUDING /MYSTIC/THEMES dirs. 
-//
-
+USE AT YOUR OWN RISK. ALWAYS BACKUP FILES, INCLUDING /MYSTIC/THEMES dirs. 
+---
 Refer to bgg-hotness.py for more detailed comments on how it all works.
 
 The purpose of these files is to show an example of how APIs can be used

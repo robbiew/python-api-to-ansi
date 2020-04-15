@@ -38,7 +38,4 @@ And thanks to g00r00 for making such awesome software and Realm of Serion BBS fo
 
 If you use this scrript on your BBS, please use your own ANSI art!
 
-Alpha
-Card & Claw BBS
-cardandclaw.com:8888
-alpha@cardandclaw.com
+Alpha - Card & Claw BBS - cardandclaw.com:8888 - alpha@cardandclaw.com

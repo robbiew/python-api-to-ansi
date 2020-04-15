@@ -1,0 +1,10 @@
+Mystic BBS: Add API Data to Menus (Python3)
+                  [v1.0]
+:-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-:
+: Example utilizes python to get API data :
+: and then write this data to your custom :
+: Menu file WITH ANSI artwork. Re-work it :
+: with your favorite APIs to make dynamic :
+: content in your menus, bulletins, etc.. :
+:-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-:
+     + Alpha - cardandclaw.com:8888 +   

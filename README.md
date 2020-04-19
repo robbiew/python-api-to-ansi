@@ -12,9 +12,7 @@ python3 bgg-hotness.py
 To use as a menu file, make sure you set this new ANSI menu file as the 'Display File' in Mystic's Menu Settings for the Main Menu (or in whatever menu you are creating).
 
 The 'bgg-hotness.cfg' file contains the configuration details (like where the menu file will be saved) and the source ANSI files used to build/layer the menu:
- - blood.ans: background art
- - header.ans: header art
- - menu-options: the menu's commands (Mystic Main menu, in this case)
+ - background.ans: background art
 
 A custom function called "print_there" in the code allows the writing of text to an exact row/column so that you can add text in and around specific places in your templates, esentially creating a kind of "layering" process.
 

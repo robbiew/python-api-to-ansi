@@ -4,7 +4,7 @@ Example python (python3) scripts showing how to build a [Mystic BBS menu](http:/
 
 /bgg-example uses a [Board Game Geek python API](https://github.com/lcosmin/boardgamegeek).
 
-/newsapi-example uses a [NewsAPI python API](https://newsapi.org/), you'll need to sign up for a free developer account to get an API Key (required).
+/newsapi-example uses a [NewsAPI python API](https://newsapi.org/). You'll need to sign up for a free developer account to get an API Key (required).
 
 Each scripts grabs data from the API, then builds/writes an ANSI file with the retrieved data when its called:
 

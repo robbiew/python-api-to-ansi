@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # -----------------------------------------------
 # utility: BGG HOTNESS
 # author: Robbie Whiting  (aka Alpha)
@@ -18,8 +16,6 @@
 # The 'bgg-hotness.cfg' file contains the configuration details (like where the menu file will be saved) and the 
 # source ANSI files used to build/layer the menu:
 #   - blood.ans: background art
-#   - header.ans: header art
-#   - menu-options: the menu's commands (Mystic Main menu, in this case)
 #
 # A custom function called "print_there" in the code allows the writing of text to an exact row/column so that 
 # you can add text in and around specific places in your templates, esentially creating a kind of "layering" process.
@@ -56,8 +52,6 @@ config.read(os.path.dirname(os.path.abspath(__file__)) + '/bgg-hotness.cfg')
 applicationAuthor = config.get('BGG Hotness Config', 'applicationAuthor')
 outputFileName = config.get('BGG Hotness Config', 'outputFileName')
 bgFileName = config.get('BGG Hotness Config', 'bgFileName')
-headerFileName = config.get('BGG Hotness Config', 'headerFileName')
-menuCmdFileName = config.get('BGG Hotness Config', 'menuCmdFileName')
 
 # -----------------------------------------------
 # initialize python3 Boardd Game Geek api // https://github.com/lcosmin/boardgamegeek
@@ -69,44 +63,22 @@ bgg = BGGClient()
 # open background .ans file
 # -----------------------------------------------
 
-f = open(bgFileName, 'r+', encoding="cp437")
+f = open(bgFileName, 'r')
 contents = f.read()
 
 # -----------------------------------------------
 # define output file format
 # -----------------------------------------------
 
-textFile = open(outputFileName, 'w+', encoding='cp437')
+textFile = open(outputFileName, 'w')
 textFile.write(contents)
-
 # -----------------------------------------------
 # Functio to write to specific X,Y coordinates
 # -----------------------------------------------
 
 def print_there(x, y, text):
     textFile.write("\x1b7\x1b[%d;%df%s\x1b8" % (x, y, text))
-
-# -----------------------------------------------
-# Add header
-# -----------------------------------------------
-
-header = open(headerFileName, 'r+', encoding='cp437') 
-count = 0
-
-while True: 
-    count += 1
-
-    # Get next line from file 
-    line = header.readline() 
-  
-    # if line is empty 
-    # end of file is reached 
-    if not line: 
-        break
-    print_there(count, 1,  line) 
-
-header.close() 
-
+textFile.write(contents)
 # -----------------------------------------------
 # Get Board Game Geek data and save each item to a variable
 # -----------------------------------------------
@@ -171,7 +143,8 @@ for item in bgg.hot_items("boardgame"):
 # Left column BGG Top 10
 # -----------------------------------------------
 
-print_there(8, 1,  '       |08·|07·|15· BoardGameGeek Top 10 ·|07·|08·')
+print_there(8, 1,  '       |08.|07.|15. BoardGameGeek Top 10 .|07.|08.')
+print_there(8, 40,  '             |08.|07.|15. Commands .|07.|08.')
 
 # Text centered within X characters
 print_there(10, 4, a.center(38))
@@ -199,27 +172,4 @@ print_there(21, 4, "|07{:%b %d, %Y}".format(datetime.date.today()).center(38) )
 # print_there(19, 1, j)
 # print_there(21, 4,  '|08{:%b %d, %Y}'.format(datetime.date.today()) )
 
-# -----------------------------------------------
-# Right column 
-# -----------------------------------------------
-
-print_there(8, 44,  '         |08·|07·|15· Commands ·|07·|08·')
-cmd = open(menuCmdFileName, 'r+', encoding='cp437') 
-count = 9
-
-while True: 
-    count += 1
-
-    # Get next line from file 
-    line = cmd.readline() 
-  
-    # if line is empty 
-    # end of file is reached 
-    if not line: 
-        break
-    print_there(count, 43, line) 
-
-cmd.close() 
 textFile.close()
-
-

@@ -1,3 +1,5 @@
+# coding: utf-8
+
 # -----------------------------------------------
 # utility: BGG HOTNESS
 # author: Robbie Whiting  (aka Alpha)
@@ -42,6 +44,8 @@ from boardgamegeek import BGGClient
 import configparser as ConfigParser
 import datetime
 import inspect
+import sys
+import codecs
 
 # -----------------------------------------------
 # variable declarations
@@ -63,15 +67,16 @@ bgg = BGGClient()
 # open background .ans file
 # -----------------------------------------------
 
-f = open(bgFileName, 'r')
+f = open(bgFileName, 'r', encoding='cp437')
 contents = f.read()
 
 # -----------------------------------------------
 # define output file format
 # -----------------------------------------------
 
-textFile = open(outputFileName, 'w')
+textFile = open(outputFileName, 'w', encoding='cp437', errors='replace')
 textFile.write(contents)
+
 # -----------------------------------------------
 # Functio to write to specific X,Y coordinates
 # -----------------------------------------------
@@ -79,6 +84,7 @@ textFile.write(contents)
 def print_there(x, y, text):
     textFile.write("\x1b7\x1b[%d;%df%s\x1b8" % (x, y, text))
 textFile.write(contents)
+  
 # -----------------------------------------------
 # Get Board Game Geek data and save each item to a variable
 # -----------------------------------------------

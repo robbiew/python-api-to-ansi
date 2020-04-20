@@ -55,23 +55,23 @@ articles = data["articles"]
 
 a = articles[0]["title"]
 for k in a.split("\n"):
-    a_safe = " ".join(re.findall(r"[a-zA-Z0-9^-]+", k))
+    a_safe = " ".join(re.findall(r"[a-zA-Z0-9-'^-]+", k))
 
 b = articles[1]["title"]
 for k in b.split("\n"):
-    b_safe = " ".join(re.findall(r"[a-zA-Z0-9^-]+", k))
+    b_safe = " ".join(re.findall(r"[a-zA-Z0-9-'^-]+", k))
 
 c = articles[2]["title"]
 for k in c.split("\n"):
-    c_safe = " ".join(re.findall(r"[a-zA-Z0-9^-]+", k))
+    c_safe = " ".join(re.findall(r"[a-zA-Z0-9-'^-]+", k))
 
 d = articles[3]["title"]
 for k in d.split("\n"):
-    d_safe = " ".join(re.findall(r"[a-zA-Z0-9^-]+", k))
+    d_safe = " ".join(re.findall(r"[a-zA-Z0-9-'^-]+", k))
 
 e = articles[4]["title"]
 for k in e.split("\n"):
-    e_safe = " ".join(re.findall(r"[a-zA-Z0-9^-]+", k))
+    e_safe = " ".join(re.findall(r"[a-zA-Z0-9-'^-]+", k))
 
 textFile.write("\n\n\n")
 

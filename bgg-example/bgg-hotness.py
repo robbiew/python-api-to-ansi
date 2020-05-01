@@ -10,22 +10,21 @@
 # Board Game Geek python API, but you could use anything.
 #
 # The script grabs 'Hotness' data from BGG, then builds/writes a mainmenu.ans file with the data 
-# (when you run 'python3 bgg-hotness.py), which can be used as a Mystic BBS menu. 
+# (when you run 'python3 bgg-hotness.py), which can then be used as a Mystic BBS menu. 
 # 
-# Make sure you set this new ANSI menu file as the 'Display File' in Mystic's Menu Settings for the Main Menu (or
+# Make sure you set this new output file as the 'Display File' in Mystic's Menu Settings for the Main Menu (or
 # whatever menu you are creating).
 #  
 # The 'bgg-hotness.cfg' file contains the configuration details (like where the menu file will be saved) and the 
-# source ANSI files used to build/layer the menu:
-#   - blood.ans: background art
+# source ANSI files used to build/layer the menu.
 #
 # A custom function called "print_there" in the code allows the writing of text to an exact row/column so that 
 # you can add text in and around specific places in your templates, esentially creating a kind of "layering" process.
 #
 # Put the files somewhere Mystic can access them (e.g. /mystic/python/hotness/) and create a Mystic Event and run the 
-# python command (e.g. Internaval, 2x per day, every hour, etc.) to build the menu: 'python3 /mystic/python/hotness/bgg-hotness.py'
+# python command (e.g. as an Interval, 2x per day, every hour, etc.) to build the menu: 'python3 /mystic/python/hotness/bgg-hotness.py'
 #
-# Testing using Linux 64 (Ubuntu 18.04) with python3.
+# Testing using Linux 64 (Ubuntu 18.04, 20.04) with python3 only.
 #
 # You can see this in action at cardandclaw.com:8888
 #
@@ -35,9 +34,9 @@
 # required Python Modules
 # -----------------------------------------------
 
-# you'll need to install the BGG API using pip:
-# > sudo apt-get install python3-pip
-# > pip install boardgamegeek2
+# You'll need to install the BGG API using pip, e.g.:
+#   'sudo apt-get install python3-pip'
+#   'pip install boardgamegeek2'
 
 import os
 from boardgamegeek import BGGClient
@@ -64,7 +63,7 @@ bgFileName = config.get('BGG Hotness Config', 'bgFileName')
 bgg = BGGClient()
 
 # -----------------------------------------------
-# open background .ans file
+# open background .ans file as codepage 437
 # -----------------------------------------------
 
 f = open(bgFileName, 'r', encoding='cp437')
@@ -78,7 +77,7 @@ textFile = open(outputFileName, 'w', encoding='cp437', errors='replace')
 textFile.write(contents)
 
 # -----------------------------------------------
-# Functio to write to specific X,Y coordinates
+# Function to write text to specific X,Y coordinates
 # -----------------------------------------------
 
 def print_there(x, y, text):
@@ -86,96 +85,38 @@ def print_there(x, y, text):
 textFile.write(contents)
   
 # -----------------------------------------------
-# Get Board Game Geek data and save each item to a variable
+# Get Board Game Geek data and write out top 10
 # -----------------------------------------------
 
-for item in bgg.hot_items("boardgame"):
-    info = item.name[:30] + (item.name[30:] and '...')
-    # Just the board game name!
-    if item.rank == 1:
-        a = ("|08" + item.name)
-    if item.rank == 2:
-        b = ("|08" + item.name)
-    if item.rank == 3:
-        c = ("|08" + item.name)
-    if item.rank == 4:
-        d = ("|08" + item.name)
-    if item.rank == 5:
-        e = ("|08" + item.name)
-    if item.rank == 6:
-        f = ("|08" + item.name)
-    if item.rank == 7:
-        g = ("|08" + item.name)
-    if item.rank == 8:
-        h = ("|08" + item.name)
-    if item.rank == 9:
-        i = ("|08" + item.name)
-    if item.rank == 10:
-        j = ("|08" + item.name)
-
-    # Left aligned, tab-spaced, with rank/numbers
-    # if item.rank == 1:
-    #     a = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 2:
-    #     b = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 3:
-    #     c = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 4:
-    #     d = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 5:
-    #     e = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 6:
-    #     f = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 7:
-    #     g = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 8:
-    #     h = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 9:
-    #     i = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(4))
-    # if item.rank == 10:
-    #     j = ("   |05{0}|04.\t|07{1}\r".format(
-    #         item.rank, info).expandtabs(1))
-
+list = bgg.hot_items("boardgame")
+# only want first 10 results from API
+length = 10
+i = 0
+count = 10
+# after the first 10, we are done
+while i > length:
+    break
+while i < length:
+    # add som Mystic pipe color codes
+    # set max width to truncate after 35 characters
+    # add an elipse '...' for text longer than 35 characters
+    # center it all
+    print_there(count, 4, (("|08" + list[i].name)[:35] + (list[i].name[35:] and '...')).center(38))
+    i += 1
+    count += 1
+    
 # -----------------------------------------------
-# Left column BGG Top 10
+# Left column Header and Footer
 # -----------------------------------------------
 
 print_there(8, 1,  '       |08.|07.|15. BoardGameGeek Top 10 .|07.|08.')
-print_there(8, 40,  '             |08.|07.|15. Commands .|07.|08.')
-
-# Text centered within X characters
-print_there(10, 4, a.center(38))
-print_there(11, 4, b.center(38))
-print_there(12, 4, c.center(38))
-print_there(13, 4, d.center(38))
-print_there(14, 4, e.center(38))
-print_there(15, 4, f.center(38))
-print_there(16, 4, g.center(38))
-print_there(17, 4, h.center(38))
-print_there(18, 4, i.center(38))
-print_there(19, 4, j.center(38))
 print_there(21, 4, "|07{:%b %d, %Y}".format(datetime.date.today()).center(38) )
 
-# Text left-aligned
-# print_there(10, 1, a)
-# print_there(11, 1, b)
-# print_there(12, 1, c)
-# print_there(13, 1, d)
-# print_there(14, 1, e)
-# print_there(15, 1, f)
-# print_there(16, 1, g)
-# print_there(17, 1, h)
-# print_there(18, 1, i)
-# print_there(19, 1, j)
-# print_there(21, 4,  '|08{:%b %d, %Y}'.format(datetime.date.today()) )
+# -----------------------------------------------
+# Right column BGG Top 10
+# -----------------------------------------------
+
+print_there(8, 40,  '             |08.|07.|15. Commands .|07.|08.')
 
 textFile.close()
+

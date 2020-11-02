@@ -5,7 +5,7 @@
 # 'apt-get install python3-pip' -- pip module installer for python3
 # 'pip3 install newsapi-python' -- https://github.com/mattlisiv/newsapi-python
 # 'pip3 install colorama' -- ANSI color helper https://github.com/tartley/colorama
-# 'pip install pytz' -- set timezone for timestamp
+# 'pip3 install pytz' -- set timezone for timestamp
 #
 # You'll need to create a NewsAPI developer account and use your own API key below:
 # get your API key at https://newsapi.org/

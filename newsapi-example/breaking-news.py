@@ -11,6 +11,7 @@
 # get your API key at https://newsapi.org/
 #
 # Edit the .cfg file and add your custom paths/file names.
+# make the python script executable, e.g. "chmod +x breaking-news.py"
 # ------------------------------------------------------------------------------------------
 
 import os
